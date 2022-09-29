@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tarea;
-
+// tengo hambre :V
 /**
  *
  * @author Usuario
@@ -27,7 +27,7 @@ public class cadena {
     }
 
     public String convertirMinusculasaMayusculas() {
-        char letra = cad.charAt(0);
+        char letra;
         String nuevaPalabra = "";
         for (int i = 0; i < cad.length(); i++) {
             letra = cad.charAt(i);
