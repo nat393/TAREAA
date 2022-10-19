@@ -4,6 +4,7 @@
  */
 package tarea;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import static tarea.Enteros.SecuenciaCollatz;
 import static tarea.Serie.PalabraCortayLarga;
@@ -59,23 +60,46 @@ public class Tarea {
 //            }
 //        }
 
-            Password contraseña = new Password ();
-            Password[]listaDcontraseñas = new Password [5]; 
-            boolean[] booleanos = new boolean[5];
-                int i = 0;            
-                while (i < 5){
-                    System.out.println("ingrese la longitud de su contraseña: ");
-                    Scanner scanner = new Scanner(System.in);
-                    int longitud = scanner.nextInt();
-                    Password nuevaContraseña = new Password(longitud);
-                    nuevaContraseña.generar(longitud);
-                    listaDcontraseñas[i] = nuevaContraseña; 
-                    booleanos[i] =  nuevaContraseña.esFuerte(); 
-                    System.out.println("nueva contraseña : " + listaDcontraseñas[i].getContraseña() + "  la contraseña es fuerte: " + booleanos[i]);
-                    i++;
-              }
-          
-             
+//            Password contraseña = new Password ();
+//            Password[]listaDcontraseñas = new Password [5]; 
+//            boolean[] booleanos = new boolean[5];
+//                int i = 0;            
+//                while (i < 5){
+//                    System.out.println("ingrese la longitud de su contraseña: ");
+//                    Scanner scanner = new Scanner(System.in);
+//                    int longitud = scanner.nextInt();
+//                    Password nuevaContraseña = new Password(longitud);
+//                    nuevaContraseña.generar(longitud);
+//                    listaDcontraseñas[i] = nuevaContraseña; 
+//                    booleanos[i] =  nuevaContraseña.esFuerte(); 
+//                    System.out.println("nueva contraseña : " + listaDcontraseñas[i].getContraseña() + "  la contraseña es fuerte: " + booleanos[i]);
+//                    i++;
+//              }
+//          
+//             CuentaBancaria nuevaCuenta = new CuentaBancaria ("Gustavo Banegas", 105.000);
+//             CuentaBancaria nuevaCuenta2 = new CuentaBancaria ("Nataly Cordero", 105.000);
+//             System.out.println(nuevaCuenta.toString());
+//             System.out.println(nuevaCuenta2.toString());
+//             nuevaCuenta.deposito(1000);
+////             nuevaCuenta2.retiro(2000);
+////             nuevaCuenta.interes();
+////             nuevaCuenta2.interes();
+////             System.out.println(nuevaCuenta.toString());
+////             System.out.println(nuevaCuenta2.toString());
+//             
+//             nuevaCuenta2.retiro(104.000);
+               
+            Contacto contacto1 = new Contacto ("Gustavo Banegas", "70996907");
+            Contacto contacto2 = new Contacto ("Nataly Cordero", "73698883");
+            Contacto contacto3 = new Contacto ("Nataly Cordero", "73698883");
+            Agenda listaDeAmigos = new Agenda ("Lista De Amigos");
+            listaDeAmigos.aniadirContacto(contacto1);
+            listaDeAmigos.aniadirContacto(contacto2);
+            listaDeAmigos.aniadirContacto(contacto3);
+            
+           // System.out.println(listaDeAmigos.listarContactos());
+           // System.out.println(listaDeAmigos.agendaLlena());
+           System.out.println();            
     }
 
     public static String MayusculaOMinuscula(char letra) {
