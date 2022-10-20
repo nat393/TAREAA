@@ -67,7 +67,7 @@ public class Agenda {
     public boolean existeContacto(Contacto C) {
         for (int i = 0; this.listaDeContactos.size() > i; i++) {
             Contacto contacto2 = this.listaDeContactos.get(i);
-            if (C.getNombre() == contacto2.getNombre()) {
+            if (C.getNombre().equals(contacto2.getNombre())){
                 return true;
             }
         }

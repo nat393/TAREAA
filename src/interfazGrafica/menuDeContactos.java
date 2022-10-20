@@ -4,7 +4,10 @@
  */
 package interfazGrafica;
 
+import java.awt.HeadlessException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import tarea.Agenda;
 import tarea.Contacto;
 
@@ -13,14 +16,16 @@ import tarea.Contacto;
  * @author Usuario
  */
 public class menuDeContactos extends javax.swing.JFrame {
-    private Agenda AG;
+
+    private ArrayList<Agenda>AG;
+    private Agenda OtherAgent2;
     /**
      * Creates new form menuDeContactos
      */
     public menuDeContactos() {
         initComponents();
         listaDeAgendas.removeAllItems();
-        
+        AG = new ArrayList<>();
     }
 
     /**
@@ -35,7 +40,7 @@ public class menuDeContactos extends javax.swing.JFrame {
         nuevaAgenda = new javax.swing.JButton();
         agregarContacto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table1 = new javax.swing.JTable();
         listaDeAgendas = new javax.swing.JComboBox<>();
         buscarContacto = new javax.swing.JButton();
         nombreAgenda = new javax.swing.JTextField();
@@ -59,7 +64,7 @@ public class menuDeContactos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -75,7 +80,7 @@ public class menuDeContactos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Table1);
 
         listaDeAgendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,15 +161,16 @@ public class menuDeContactos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaDeAgendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaDeAgendasActionPerformed
-        // TODO add your handling code here:
+        listar(OtherAgent2);
     }//GEN-LAST:event_listaDeAgendasActionPerformed
 
     private void nuevaAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaAgendaActionPerformed
-      String Agendita = nombreAgenda.getText();
-      int tamanio1 = Integer.parseInt(tamanio.getText());
-      AG = new Agenda(Agendita);
-      listaDeAgendas.addItem(AG);
-      
+        String Agendita = nombreAgenda.getText();
+        int tamanio1 = Integer.parseInt(tamanio.getText());
+        Agenda newAgent = new Agenda(Agendita);
+        AG.add(newAgent);
+        listaDeAgendas.addItem(newAgent);
+        
     }//GEN-LAST:event_nuevaAgendaActionPerformed
 
     private void tamanioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamanioActionPerformed
@@ -180,18 +186,42 @@ public class menuDeContactos extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreDeContactoActionPerformed
 
     private void agregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarContactoActionPerformed
-       // AG = (Agenda) listaDeAgendas.getSelectedItem();
-        String nuevoContacto = nombreDeContacto.getText();
-        String telefono = numeroTelefono.getText();
-        Contacto nuevoContacto1 = new Contacto(nuevoContacto, telefono);
-        AG.aniadirContacto(nuevoContacto1);
-        JOptionPane.showMessageDialog(this, "el contacto fue agregado con exito!");
-    }//GEN-LAST:event_agregarContactoActionPerformed
+        // AG = (Agenda) listaDeAgendas.getSelectedItem();
+        try {
+            Agenda OtherAgent = (Agenda)listaDeAgendas.getSelectedItem();
+            int newInt = AG.indexOf(OtherAgent);
+            OtherAgent2 = AG.get(newInt);
+            String nuevoContacto = nombreDeContacto.getText();
+            String telefono = numeroTelefono.getText();
+            Contacto nuevoContacto1 = new Contacto(nuevoContacto, telefono);
+            OtherAgent2.aniadirContacto(nuevoContacto1);
+            JOptionPane.showMessageDialog(this, "el contacto fue agregado con exito!");
+            listar(OtherAgent2);
+        }catch(java.lang.Error E){
+        JOptionPane.showMessageDialog(this, E.getMessage());
+        
+        }
 
+    }//GEN-LAST:event_agregarContactoActionPerformed
+    
+        private void listar(Agenda OtherAgent22){
+            ArrayList<Contacto>contactList= OtherAgent22.getListaDeContactos();
+            DefaultTableModel tabla = new DefaultTableModel();
+            tabla.addColumn("Nombres de contactos");
+            tabla.addColumn("Telefonos");
+            for (int i = 0; contactList.size() > i; i++){
+                Contacto newContact = contactList.get(i);
+                Object[]actualContact = new Object[]{newContact.getNombre(),newContact.getTelefono()};
+                tabla.addRow(actualContact);
+                 
+            }
+            Table1.setModel(tabla);
+        }
+    
     private void numeroTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroTelefonoActionPerformed
         
     }//GEN-LAST:event_numeroTelefonoActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -228,10 +258,10 @@ public class menuDeContactos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table1;
     private javax.swing.JButton agregarContacto;
     private javax.swing.JButton buscarContacto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<Agenda> listaDeAgendas;
     private javax.swing.JTextField nombreAgenda;
     private javax.swing.JTextField nombreDeContacto;
